@@ -1,0 +1,33 @@
+CODEBOOK
+
+VARIABLES:
+-------------
+features: Dataframe with two columns (int, char) with ID and measures get about accelerometer and gravity
+activity_label: Dataframe with two columns (int, char) with ID and name of the activity performed
+subjects_test: Dataframe. Each row identifies the subject who performed the activity for each window sample. Its range is from 1 to 30
+activities_test: Dataframe. Each row identifies the ID and label of the activity performed for each window sample
+data_test: Dataframe. Each row identifies the subject ID, name of the activity performed and the feature garthered for each feature relate to mean or std
+
+subjects_train: similar to subjects_test but for train set
+activities_train: similar to subjects_test but for train set
+data_train: similar to subjects_test but for train set
+
+dataset: Dataframe combining test and train data set
+
+tidy_dataset_mean: Table mirror of dataset data
+result_tidy: Table with tidy dataset containing the mean of each measure for each subject-activity
+result_tidy <- tidy_dataset_mean %>% group_by(subject, activity) %>% summarise_each(funs(mean))
+ 
+CALCULATION:
+--------------
+To calculate the mean of each feature and to group by subject and activity, I've used the library dplyr using group_by function to group and summarize_each to apply function mean to each column about features selected as following:
+tidy_dataset_mean %>% group_by(subject, activity) %>% summarise_each(funs(mean)))
+
+SELECTED FEATURES:
+--------------------
+I have used the following features to populate tidy dataset, relates to:
+- Triaxial acceleration from the accelerometer (total acceleration) and the estimated body acceleration.
+- Triaxial Angular velocity from the gyroscope. 
+'bodyAcc_mean_X',
+'bodyAcc_mean_Y''bodyAcc_mean_Z''bodyAcc_std_X''bodyAcc_std_Y''bodyAcc_std_Z''gravityAcc_mean_X''gravityAcc_mean_Y''gravityAcc_mean_Z''gravityAcc_std_X''gravityAcc_std_Y''gravityAcc_std_Z''bodyAccJerk_mean_X''bodyAccJerk_mean_Y''bodyAccJerk_mean_Z''bodyAccJerk_std_X''bodyAccJerk_std_Y''bodyAccJerk_std_Z''bodyGyro_mean_X''bodyGyro_mean_Y''bodyGyro_mean_Z''bodyGyro_std_X''bodyGyro_std_Y''bodyGyro_std_Z''bodyGyroJerk_mean_X''bodyGyroJerk_mean_Y''bodyGyroJerk_mean_Z''bodyGyroJerk_std_X''bodyGyroJerk_std_Y''bodyGyroJerk_std_Z''bodyAccMag_mean''bodyAccMag_std''gravityAccMag_mean''gravityAccMag_std''bodyAccJerkMag_mean''bodyAccJerkMag_std''bodyGyroMag_mean''bodyGyroMag_std''bodyGyroJerkMag_mean''bodyGyroJerkMag_std''fBodyAcc_mean_X''fBodyAcc_mean_Y''fBodyAcc_mean_Z''fBodyAcc_std_X''fBodyAcc_std_Y''fBodyAcc_std_Z''fBodyAccJerk_mean_X''fBodyAccJerk_mean_Y''fBodyAccJerk_mean_Z''fBodyAccJerk_std_X''fBodyAccJerk_std_Y''fBodyAccJerk_std_Z''fBodyGyro_mean_X''fBodyGyro_mean_Y''fBodyGyro_mean_Z''fBodyGyro_std_X''fBodyGyro_std_Y''fBodyGyro_std_Z''fBodyAccMag_mean''fBodyAccMag_std''bodyBodyAccJerkMag_mean''bodyBodyAccJerkMag_std''bodyBodyGyroMag_mean''bodyBodyGyroMag_std''bodyBodyGyroJerkMag_mean''bodyBodyGyroJerkMag_std'
+
